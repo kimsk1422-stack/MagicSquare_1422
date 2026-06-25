@@ -1,3 +1,11 @@
+[project]
+name = "magic-square-1422"
+version = "0.1.0"
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+gui = ["PyQt6>=6.6"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
