@@ -1,0 +1,38 @@
+# MagicSquare_1422 — 세션 3 Cursor Rules (초안)
+
+## 도메인
+
+- 격자: **4×4** 정수 배열
+- 빈칸: **0**
+- 사용 숫자: **1~16** (각각 최대 1회)
+- 마법 상수: **34**
+- **10선** — 행 R1~R4, 열 C1~C4, 대각선 D1·D2; 각 선의 합이 34인지 검사
+
+## API
+
+```python
+validate_lines(grid) -> {"status": "pass" | "fail" | "incomplete", "failed_lines": [...]}
+```
+
+| status | 의미 |
+|--------|------|
+| `pass` | 10선 모두 합 34 (완성·유효) |
+| `fail` | 완성 격자이나 하나 이상의 선이 합 ≠ 34 |
+| `incomplete` | 빈칸(0)이 남아 10선 판정 불가 |
+
+- `failed_lines`: 합이 34가 아닌 선 ID 목록 (예: `"R1"`, `"C3"`, `"D2"`). `pass`·`incomplete`일 때는 빈 리스트.
+
+## TDD
+
+- 사이클: **RED → GREEN → REFACTOR** 순서를 반드시 따른다.
+- **RED**: `tests/` 만 수정. 실패하는 테스트를 먼저 추가한다.
+- **GREEN**: `src/` 에 최소 구현만 추가해 테스트를 통과시킨다.
+- **REFACTOR**: 전부 통과한 뒤에만 구조를 정리한다. 전후 `pytest -q`로 동작 불변을 확인한다.
+- 금지: assert 완화, `pytest.skip`, `xfail`, `assert True` 등으로 실패를 우회하지 않는다.
+- 요청하지 않은 기능은 추가하지 않는다.
+
+## AI 행동
+
+- 사용자와의 대화·설명은 **한국어**로 한다.
+- TDD 작업 시 응답 **첫 줄**에 현재 단계를 선언한다. 예: `Phase: RED`, `Phase: GREEN`, `Phase: REFACTOR`
+- **git commit**은 사용자가 명시적으로 요청할 때만 수행한다.
